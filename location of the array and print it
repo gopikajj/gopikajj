@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+	int n,i,j,arr[n];
+	printf("\nGopika.J\n192324032\n");
+	printf("enter the size of the array:");
+	scanf("%d",&n);
+	printf("enter the elements:");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&arr[i]);
+	}
+	printf("eneter the element to be found:");
+	scanf("%d",&j);
+	for(i=0;i<n;i++)
+	{
+		if(arr[i]==j)
+		{
+			printf("%d is found in index value %d",j,i);
+			return 0;
+		}
+	}
+	printf("element is not found");
+	return 0;
+}
