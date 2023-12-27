@@ -1,0 +1,71 @@
+include <stdio.h>
+#include <stdlib.h>
+struct Node
+{
+    int data;
+    struct Node* next;
+}*head,*tail,*n;
+
+void insert(struct Node** head_ref, int num)
+{
+    struct Node* n = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* last = *head_ref;
+    n->data = num;
+    n->next = NULL;
+    if (*head_ref == NULL)
+    {
+        *head_ref = n;
+        return;
+    }
+    while (last->next != NULL)
+        last = last->next;
+    last->next = n;
+}
+struct Node* merge(struct Node* list1, struct Node* list2)
+{
+    if (list1 == NULL)
+        return list2;
+    if (list2 == NULL)
+        return list1;
+    struct Node* merged = NULL;
+    if (list1->data <= list2->data)
+    {
+        merged = list1;
+        merged->next = merge(list1->next, list2);
+    }
+    else
+    {
+        merged = list2;
+        merged->next = merge(list1, list2->next);
+    }
+    return merged;
+}
+void print(struct Node* node)
+{
+    while (node != NULL)
+    {
+        printf("%d ", node->data);
+        node = node->next;
+    }
+    printf("\n");
+}
+int main()
+{
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+    insert(&list1, 1);
+    insert(&list1, 3);
+    insert(&list1, 5);
+    insert(&list2, 2);
+    insert(&list2, 4);
+    insert(&list2, 6);
+    printf("\nGopika.j\n192324032\n");
+    printf("sorted list 1: ");
+    print(list1);
+    printf("Sorted list 2: ");
+    print(list2);
+    struct Node* merged = merge(list1, list2);
+    printf("Merged list: ");
+    print(merged);
+    return 0;
+}
