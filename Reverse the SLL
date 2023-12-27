@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+    int data;
+    struct Node * next;
+}*head,*tail,*n;
+
+
+void ins_beg(int num)
+{
+    n=(struct Node*)malloc(sizeof(struct Node));
+    n->data=num;
+    n->next=NULL;
+    if(head==NULL)
+    {
+        head=n;
+        tail=n;
+    }
+    else
+    {
+        n->next=head;
+        head=n;
+    }
+}
+void display()
+{
+    struct Node*t = head;
+    printf("Linked List: ");
+    while (t != NULL) {
+        printf("%d -> ", t->data);
+        t = t->next;
+    }
+    printf("NULL\n");
+}
+
+void reverse()
+{
+    struct Node *prev = NULL, *t = head, *next = NULL;
+
+    while (t != NULL)
+    {
+        next = t->next;
+        t->next = prev;
+        prev = t;
+        t = next;
+    }
+    head = prev;
+}
+
+int main()
+{
+    printf("\nGopika.J\n192324032\n");
+    ins_beg(4);
+    ins_beg(8);
+    ins_beg(11);
+    ins_beg(6);
+    printf("Original ");
+    display();
+    reverse();
+    printf("\nReversed ");
+    display();
+    return 0;
+}
