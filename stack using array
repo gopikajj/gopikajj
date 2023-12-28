@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 100
+int stack[SIZE];
+int top;
+int isEmpty()
+ {
+    if (top == -1) 
+    {
+       return 1;
+    } 
+    else 
+    { 
+        return 0;
+    }
+}
+int isFull()
+ {
+    if (top == SIZE-1)
+    {
+       return 1;
+    } 
+    else 
+    {
+        return 0;
+    }
+}
+
+int push(int data) 
+{
+    if (!isFull())
+    {
+	int x;
+        top = top + 1;
+        stack[top] = data;
+    } 
+    else 
+    {
+        printf("Stack is full\n");
+    }
+}
+
+int pop() 
+{
+	int data;
+        if (!isEmpty()) 
+	{
+           data = stack[top];
+           top = top - 1;
+           printf("popped element is:%d\n",data);
+        return data;
+    } 
+	else 
+	{
+        printf("Stack is empty\n");
+        return -1;
+    }
+}
+
+int peek() 
+{
+    printf("the element peeked is:%d\n",stack[top]);
+}
+
+void display()
+ {
+ 	int i;
+    for(i=top;i>0;i--)
+    {
+    	printf("%d\n",stack[i]);
+	}
+}
+int main()
+ {
+    int choice, data;
+    printf("\nGopika.J\n192324032\n");
+    while (1)
+	 {
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Display\n");
+        printf("4. Peek\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) 
+		{
+            case 1:
+                printf("Enter the element to push: ");
+                scanf("%d", &data);
+                push(data);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                peek();
+                break;
+            case 5:
+                printf("Exiting the program.\n");
+                return 0;
+            default:
+                printf("Invalid choice.\n");
+        }
+    }
+    return 0;
