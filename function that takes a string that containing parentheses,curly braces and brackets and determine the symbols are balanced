@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#define size 100
+char stack[size];
+int top = -1;
+
+char isFull()
+{
+	if(top==size-1)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+char isEmpty()
+{
+	if(top==-1)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+int push(char c)
+{
+	if(!isFull())
+	{
+		top=top+1;
+		stack[top]=c;
+	}
+}
+char pop()
+{
+	char c;
+	if(!isEmpty())
+	{
+		c=stack[top];
+		top=top-1;
+		printf("%c",c);
+	}
+}
+bool match(char a, char b) 
+{
+    if (a == '(' && b == ')')
+	{
+        return true;
+    } 
+	else if (a == '[' && b == ']')
+	{
+        return true;
+    } 
+	else if (a == '{' && b == '}')
+	{
+        return true;
+    } 
+	else 
+	{
+        return false;
+    }
+}
+
+bool balance(char* ch) 
+{
+    int i;
+    for (i = 0; i < strlen(ch); i++) 
+	{
+        if (ch[i] == '(' || ch[i] == '[' || ch[i] == '{') 
+		{
+            push(ch[i]);
+        }
+		else if (ch[i] == ')' || ch[i] == ']' || ch[i] == '}')
+		
+		{
+            if (top == -1) 
+			{
+                return false;
+            } 
+			else if (!match(pop(), ch[i])) 
+			{
+                return false;
+            }
+        }	
+    }
+    return top == -1;
+}
+int main() 
+{
+    char ch[size];
+    printf("\nGopika.J");
+    printf("\n192324032");
+    printf("\nEnter a string containing parentheses, square brackets, and curly braces: ");
+    scanf("%s", ch);
+    if (balance(ch)) 
+	{
+        printf("The expression is balanced.\n");
+    } else 
+	{
+        printf("The expression is not balanced.\n");
+    }
+    return 0;
+}
