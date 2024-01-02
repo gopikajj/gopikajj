@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node
+{
+    int data;
+    struct Node* next;
+}*top,*n;
+
+void push(int num)
+{
+	n=(struct Node*)malloc(sizeof(struct Node));
+	if(!n)
+	{
+		printf("overflow");
+		exit(1);
+	}
+	else
+	{
+		n->data=num;
+		n->next=top;
+		top=n;
+	}
+}
+void pop()
+{
+	struct Node*t;
+	{
+		if(top==NULL)
+		{
+			printf("overflow");
+			exit(1);
+		}
+		else
+		{
+			t=top;
+			top=top->next;
+			t->next=NULL;
+			free(t);
+		}
+	}
+	printf("the node is popped\n");
+}
+void display()
+{
+	if(top==NULL)
+	{
+		printf("underflow");
+		exit(1);
+	}
+	else
+	{
+		while(top!=NULL)
+		{
+			printf("%d\n",top->data);
+			top=top->next;
+		}
+	}
+}
+void peek()
+{
+    	printf("the element peeked is %d\n",top->data);
+}
+int main()
+ {
+ 	printf("\nGopika.J\n192324032\n");
+    int choice, a,b,c,d;
+    while (1)
+	 {
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Display\n");
+        printf("4. Peek\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) 
+		{
+            case 1:
+                printf("Enter the element to push: ");
+                scanf("%d",&a);
+                scanf("%d",&b);
+                scanf("%d",&c);
+                scanf("%d",&d);
+                push(a);
+                push(b);
+                push(c);
+                push(d);
+                break;
+            case 2:
+                pop(d);
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                peek();
+                break;
+            case 5:
+                printf("Exiting the program.\n");
+                return 0;
+            default:
+                printf("Invalid choice.\n");
+        }
+    }
+    return 0;
+}
