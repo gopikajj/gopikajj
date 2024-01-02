@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node 
+{
+    int data;
+    struct node *next;
+}*front,*rear,*n;
+
+void Enqueue(int x) 
+{
+    n = (struct node *)malloc(sizeof(struct node));
+    n->data = x;
+    n->next = NULL;
+    if (front == NULL && rear == NULL) 
+	{
+        front = rear = n;
+        rear->next = front;
+    } 
+	else 
+	{
+        rear->next = n;
+        rear = n;
+        rear->next = front;
+    }
+}
+
+void Dequeue() 
+{
+    struct node *t;
+    t = front;
+    if (front == NULL && rear == NULL) 
+	{
+        printf("\nQueue is empty");
+    }
+	else if (front == rear) 
+	{
+        front = rear = NULL;
+        free(t);
+    } 
+	else 
+	{
+        front = front->next;
+        rear->next = front;
+        printf("\ndeleted element is:%d",t->data);
+        free(t);
+    }
+}
+
+void Display() 
+{
+    struct node *t;
+    t = front;
+    if (front == NULL && rear == NULL) 
+	{
+        printf("\nQueue is empty");
+    } 
+	else 
+	{
+        printf("\nThe elements in a Queue are: ");
+        do 
+		{
+            printf("%d,", t->data);
+            t = t->next;
+        } 
+		while (t != front);
+    }
+}
+
+void Front() 
+{
+    if (front == NULL && rear == NULL) 
+	{
+        printf("\nQueue is empty");
+    } 
+	else 
+	{
+        printf("\nThe front element is %d", front->data);
+    }
+}
+
+void Rear() 
+{
+    if (front == NULL && rear == NULL) 
+	{
+        printf("\nQueue is empty");
+    } 
+	else 
+	{
+        printf("\nThe rear element is %d", rear->data);
+    }
+}
+
+int main() 
+{
+	printf("\nGopika.J\n192324032\n");
+    Enqueue(10);
+    Enqueue(20);
+    Enqueue(30);
+    Display();
+    Dequeue();
+    Front();
+    Rear();
+    return 0;
+}
