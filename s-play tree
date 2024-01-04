@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int key;
+    struct node *left, *right;
+};
+struct node *newNode(int key)
+{
+    struct node *node = (struct node *)malloc(sizeof(struct node));
+    node->key = key;
+    node->left = node->right = NULL;
+    return (node);
+}
+struct node *rightRotate(struct node *x)
+{
+    struct node *y = x->left;
+    x->left = y->right;
+    y->right = x;
+    return y;
+}
+struct node *leftRotate(struct node *x)
+{
+    struct node *y = x->right;
+    x->right = y->left;
+    y->left = x;
+    return y;
+}
+struct node *splay(struct node *root, int key)
+{
+    if (root == NULL || root->key== key)
+        return root;
+    struct node *current = root;
+    while (current != NULL)
+    {
+        if (current->key == key)
+            return current;
+        else if (current->key > key)
+            current = current->left;
+        else
+            current = current->right;
+    }
+    return root;
+}
+struct node *insert(struct node *root, int k)
+{
+    if (root == NULL)
+        return newNode(k);
+    root = splay(root, k);
+    if (root->key == k)
+        return root;
+    struct node *newnode = newNode(k);
+    if (root->key > k)
+    {
+        newnode->right = root;
+        newnode->left = root->left;
+        root->left = NULL;
+    }
+    else
+    {
+        newnode->left = root;
+        newnode->right = root->right;
+        root->right = NULL;
+    }
+    return newnode;
+}
+void preOrder(struct node *root)
+{
+    if (root != NULL)
+    {
+        printf("%d ", root->key);
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+}
+int main()
+{
+	printf("\nGopika.J\n192324032\n");
+    struct node *root = newNode(100);
+    root->left = newNode(50);
+    root->right = newNode(200);
+    root->left->left = newNode(40);
+    root->left->left->left = newNode(30);
+    root->left->left->left->left = newNode(20);
+    printf("Preorder traversal of the Splay tree is \n");
+    preOrder(root);
+    root = insert(root, 25);
+    root = insert(root,60);
+    printf("\nPreorder traversal of after insertion Splay tree is \n");
+    preOrder(root);
+    return 0;
