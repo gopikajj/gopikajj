@@ -1,0 +1,128 @@
+include <stdio.h>
+#include <stdlib.h>
+#define SIZE 10
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+
+struct Hash
+{
+    struct Node* table[SIZE];
+};
+
+struct Node* createNode(int value)
+{
+    struct Node* n = (struct Node*)malloc(sizeof(struct Node));
+    n->data = value;
+    n->next = NULL;
+    return n;
+}
+
+void HashTable(struct Hash* ht)
+{
+	int i;
+    for ( i = 0; i < SIZE; i++)
+    {
+        ht->table[i] = NULL;
+    }
+}
+
+void linearProbe(struct Hash* ht, int value)
+{
+    int i = value % SIZE;
+    if (ht->table[i] == NULL)
+    {
+        ht->table[i] = createNode(value);
+    }
+    else
+    {
+        int j = 1;
+        while (ht->table[(i + j) % SIZE] != NULL)
+        {
+            j++;
+        }
+        ht->table[(i + j) % SIZE] = createNode(value);
+    }
+}
+
+void quadraticProbe(struct Hash* ht, int value)
+{
+    int i = value % SIZE;
+    if (ht->table[i] == NULL) {
+        ht->table[i] = createNode(value);
+    } else {
+        int j = 1;
+        while (ht->table[(i + j * j) % SIZE] != NULL)
+        {
+            j++;
+        }
+        ht->table[(i + j * j) % SIZE] = createNode(value);
+    }
+}
+
+void chaining(struct Hash* ht, int value)
+{
+    int i = value % SIZE;
+    if (ht->table[i] == NULL)
+    {
+        ht->table[i] = createNode(value);
+    }
+    else
+    {
+        struct Node* newNode = createNode(value);
+        newNode->next = ht->table[i];
+        ht->table[i] = newNode;
+    }
+}
+
+void display(struct Hash* ht)
+{
+	int i;
+    printf("Hash Table:\n");
+    for ( i = 0; i < SIZE; i++)
+    {
+        printf("%d -> ", i);
+        struct Node* temp = ht->table[i];
+        while (temp != NULL)
+        {
+            printf("%d -> ", temp->data);
+            temp = temp->next;
+        }
+        printf("NULL\n");
+    }
+}
+
+int main()
+{
+	printf("\nGopika.J\n192324032\n");
+    struct Hash linearProbing, quadraticProbing,separatechaining;
+    HashTable(&linearProbing);
+    HashTable(&quadraticProbing);
+    HashTable(&separatechaining);
+    int values[] = {25, 42, 7, 16, 35, 11, 32, 19, 60, 28}; 
+    printf("Linear Probing:\n");
+    int i;
+    for ( i = 0; i < sizeof(values) / sizeof(values[0]); i++)
+	 {
+        linearProbe(&linearProbing, values[i]);
+    }
+    display(&linearProbing);
+
+    printf("\nQuadratic Probing:\n");
+    for (i = 0; i < sizeof(values) / sizeof(values[0]); i++)
+	 {
+        quadraticProbe(&quadraticProbing, values[i]);
+    }
+    display(&quadraticProbing);
+
+    printf("\ separate Chaining:\n");
+    for ( i = 0; i < sizeof(values) / sizeof(values[0]); i++)
+	 {
+        chaining(&separatechaining, values[i]);
+    }
+    display(&separatechaining);
+
+    return 0;
+}
