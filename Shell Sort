@@ -1,0 +1,31 @@
+#include <stdio.h>
+void Shell_sort(int Array[], int N)
+{
+    int gap, j, i, Temp;
+    for (gap = N/2; gap > 0; gap = gap/2){
+        for (i = gap; i < N; i++) {
+            Temp = Array[i];
+            for (j = i; j >= gap && Array[j - gap] > Temp; j = j-gap){
+            Array[j] = Array[j - gap];
+        }
+        Array[j] = Temp;
+        }
+    }
+}
+void Display_array(int arr[], int n){
+	int i;
+  for( i=0; i<n; i++){
+     printf("%d  ", arr[i]);
+  }
+  printf("\n");
+}
+
+int main(){
+	printf("\nGopika.J\n192324032\n");
+    int array[]={21, 12, 14, 46, 7, 25, 10, 62, 19, 31, 1};
+    int size =sizeof(array) / sizeof(int);
+    Shell_sort(array, size);
+    printf("Sorted array is: \n");
+    Display_array(array, size);
+    return 0;
+}
