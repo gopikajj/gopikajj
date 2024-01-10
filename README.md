@@ -201,6 +201,13 @@ Day 13
 
 13.5 Implement a C Program to perform Shell Sort
 
+Day 14
+
+14.1 Implement a C Program to perform Selection Sort
+
+14.2 Implement a C Program to perform Quick Sort
+
+
 
 
 
