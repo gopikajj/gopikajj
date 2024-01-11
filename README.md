@@ -207,6 +207,21 @@ Day 14
 
 14.2 Implement a C Program to perform Quick Sort
 
+Day 15
+
+15.1 Implement a C Program to represent a Graph  using Matrix
+
+15.2 Implement a C Program to represent a Graph using Linked List
+
+15.3 Implement a C Program to perform Topological ordering
+
+Day 16
+
+16.1 Implement a C Program to find MST for the given graph using Prim's Algorithm
+
+16.2 Implement a C Program to find MST for the given graph using Kruskal's Algorithm
+
+
 
 
 
