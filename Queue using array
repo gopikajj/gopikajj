@@ -1,3 +1,4 @@
+#include<stdio.h>
 struct Queue {
 
     int front, rear, size;
