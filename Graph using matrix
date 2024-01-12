@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+#define MAX_VERTICES 5
+
+
+int adjacencyMatrix[MAX_VERTICES][MAX_VERTICES];
+
+void initializeGraph() {
+	int i,j;
+    for ( i = 0; i < MAX_VERTICES; i++) {
+        for (j = 0; j < MAX_VERTICES; j++) {
+            adjacencyMatrix[i][j] = 0;
+        }
+    }
+}
+void addEdge(int start, int end) {
+
+    adjacencyMatrix[start][end] = 1;
+    adjacencyMatrix[end][start] = 1;
+}
+
+
+void displayMatrix() {
+	int i,j;
+    for ( i = 0; i < MAX_VERTICES; i++) {
+        for ( j = 0; j < MAX_VERTICES; j++) {
+            printf("%d ", adjacencyMatrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main() {
+	printf("\nGopika.J\n192324032\n");
+	printf("The adjacency matrix is:\n");
+    initializeGraph();
+    addEdge(0, 1);
+    addEdge(0, 3);
+    addEdge(1, 3);
+    addEdge(2, 4);
+    displayMatrix();
+    return 0;
+}
