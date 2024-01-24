@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+int stack[MAX_SIZE];
+int top = -1;
+
+void push(int element) {
+    if (top == MAX_SIZE - 1) {
+        printf("Stack overflow\n");
+        return;
+    }
+    stack[++top] = element;
+}
+
+int pop() {
+    if (top == -1) {
+        printf("Stack underflow\n");
+        return -1;
+    }
+    return stack[top--];
+}
+
+void deleteMiddle() {
+    int mid = (top + 1) / 2;
+    int temp[MAX_SIZE];
+    int i = 0;
+    while (i < mid) {
+        temp[i] = pop();
+        i++;
+    }
+    pop();
+    while (i > 0) {
+        push(temp[--i]);
+    }
+}
+
+void display() {
+	int i;
+    if (top == -1) {
+        printf("Stack is empty\n");
+        return;
+    }
+    printf("Stack elements: ");
+    for (i = 0; i <= top; i++) {
+        printf("%d ", stack[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+	printf("Gopika.J\n192324032\n");
+    push(1);
+    push(2);
+    push(3);
+    push(4);
+    push(5);
+    display();
+    deleteMiddle();
+    display();
+    return 0;
+}
